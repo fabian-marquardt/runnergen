@@ -1,0 +1,5 @@
+<h2>Magic Ability</h2>
+
+<md-select placeholder="Select magic ability" [(ngModel)]="character.magic_ability" floatPlaceholder="never">
+   <md-option *ngFor="let ability of magic_abilities" [value]="ability.value">{{ ability.text }}</md-option>
+</md-select>

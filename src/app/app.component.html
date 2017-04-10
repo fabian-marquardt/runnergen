@@ -1,3 +1,13 @@
-<h1>
-  {{title}}
-</h1>
+<h1>Runnergen Test</h1>
+
+<md-card>Used attribute points: {{ character.attribute_points }}</md-card>
+
+<magic-ability [character]="character"></magic-ability>
+
+<metatype [character]="character"></metatype>
+
+<attribute-group [attributes]="character.specialAttributes" title="Special Attributes"></attribute-group>
+
+<attribute-group [attributes]="character.physicalAttributes" title="Physical Attributes"></attribute-group>
+
+<attribute-group [attributes]="character.mentalAttributes" title="Mental Attributes"></attribute-group>

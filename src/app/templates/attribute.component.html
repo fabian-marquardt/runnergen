@@ -1,0 +1,10 @@
+<div *ngIf="attribute">
+    {{ attribute.name }}
+
+    <md-input-container>
+        <input mdInput value="{{ attribute.effective }}">
+    </md-input-container>
+
+    <button md-mini-fab (click)="increase()"><md-icon>add</md-icon></button>
+    <button md-mini-fab (click)="decrease()"><md-icon>remove</md-icon></button>
+</div>

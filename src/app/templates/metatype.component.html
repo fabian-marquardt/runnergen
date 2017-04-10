@@ -1,0 +1,5 @@
+<h2>Metatype</h2>
+
+<md-select placeholder="Select metatype" [(ngModel)]="character.metatype" floatPlaceholder="never">
+   <md-option *ngFor="let metatype of metatypes" [value]="metatype.value">{{ metatype.text }}</md-option>
+</md-select>
