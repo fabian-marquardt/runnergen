@@ -1,12 +1,18 @@
 import { Attribute } from './attribute';
 import { Metatype } from './metatype';
 import { MagicAbility } from './magic-ability';
+import { MetatypePriority, AttributePriority } from './priority';
 
 
 export class Character{
     private _metatype: Metatype;
     private _magic_ability: MagicAbility;
     private _attribute_points: number;
+    private _special_attribute_points: number;
+
+    // Priorities
+    readonly metatype_priority: MetatypePriority;
+    readonly attribute_priority: AttributePriority;
 
     // Special Attributes
     readonly edge: Attribute;
@@ -29,6 +35,11 @@ export class Character{
 
         // Init counters
         this._attribute_points = 0;
+        this._special_attribute_points = 0;
+
+        // Init priorities
+        this.metatype_priority = new MetatypePriority();
+        this.attribute_priority = new AttributePriority();
 
         // Init attributes
         this.edge = new Attribute("Edge");
@@ -71,7 +82,6 @@ export class Character{
                 this.setHumanBaseValues();
                 break;
             case Metatype.Elf:
-                
                 this.setElfBaseValues();
                 break;
             case Metatype.Orc:
@@ -95,6 +105,29 @@ export class Character{
 
     set magic_ability(magic_ability: MagicAbility) {
         this._magic_ability = magic_ability;
+        switch (this._magic_ability) {
+            case MagicAbility.Mundane:
+                this.setMundaneBaseValues();
+                break;
+            case MagicAbility.Magician:
+                this.setMagicianBaseValues();
+                break;
+            case MagicAbility.AspectedMagician:
+                this.setAspectedMagicianBaseValues();
+                break;
+            case MagicAbility.Adept:
+                this.setAdeptBaseValues();
+                break;
+            case MagicAbility.MysticAdept:
+                this.setMysticAdeptBaseValues();
+                break;
+            case MagicAbility.Technomancer:
+                this.setTechnomancerBaseValues();
+                break;
+        
+            default:
+                break;
+        }
     }
 
     setHumanBaseValues(){
@@ -207,6 +240,44 @@ export class Character{
         this.charisma.max = 4;
     }
 
+    setMundaneBaseValues(){
+        this.magic.base = 0;
+        this.magic.max = 0;
+        this.resonance.base = 0;
+        this.resonance.max = 0;
+    }
+
+    setMagicianBaseValues(){
+        console.log("Set magic base values according to priority");
+        this.resonance.base = 0;
+        this.resonance.max = 0;
+    }
+
+    setAspectedMagicianBaseValues(){
+        console.log("Set magic base values according to priority");
+        this.resonance.base = 0;
+        this.resonance.max = 0;
+    }
+
+    setAdeptBaseValues(){
+        console.log("Set magic base values according to priority");
+        this.resonance.base = 0;
+        this.resonance.max = 0;
+    }
+
+    setMysticAdeptBaseValues(){
+        console.log("Set magic base values according to priority");
+        this.resonance.base = 0;
+        this.resonance.max = 0;
+    }
+
+    setTechnomancerBaseValues(){
+        console.log("Set resonance base values according to priority");
+        this.magic.base = 0;
+        this.magic.max = 0;
+    }
+
+
     get specialAttributes(): Attribute[] {
         return [this.edge, this.magic, this.resonance];
     }
@@ -223,8 +294,15 @@ export class Character{
         return this._attribute_points;
     }
 
+    get special_attribute_points(): number {
+        return this._special_attribute_points;
+    }
+
     recalculateSpecialAttributePoints() {
-        console.log("Recalculate stub!")
+        this._special_attribute_points = 0;
+        this.specialAttributes.forEach(element => {
+            this._special_attribute_points += element.skilled;
+        });
     }
 
     recalculateAttributePoints() {

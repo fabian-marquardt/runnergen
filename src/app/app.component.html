@@ -1,13 +1,40 @@
 <h1>Runnergen Test</h1>
 
-<md-card>Used attribute points: {{ character.attribute_points }}</md-card>
+<md-tab-group>
+  <md-tab label="Priorities">
+      <priority [priority]="character.metatype_priority"></priority>
+      <priority [priority]="character.attribute_priority"></priority>
+  </md-tab>
+  <md-tab label="Metatype and Magic ability">
+    <metatype [character]="character"></metatype>
+    <magic-ability [character]="character"></magic-ability>
+  </md-tab>
+  <md-tab label="Attributes">
+    <md-card>
+      <md-card-header>
+        <md-card-title>Attribute points</md-card-title>
+        <md-card-subtitle>{{ character.attribute_points }} / {{ character.attribute_priority.getAttributePoints() }} points used</md-card-subtitle>
+      </md-card-header>
+      <md-card-content>
+        <md-progress-bar mode="determinate" [value]="character.attribute_points / character.attribute_priority.getAttributePoints() * 100"></md-progress-bar>
+      </md-card-content>
+    </md-card>
 
-<magic-ability [character]="character"></magic-ability>
+    <md-card>
+      <md-card-header>
+        <md-card-title>Special attribute points</md-card-title>
+        <md-card-subtitle>{{ character.special_attribute_points }} / {{ character.metatype_priority.getSpecialAttributePoints(character.metatype) }} points used</md-card-subtitle>
+      </md-card-header>
+      <md-card-content>
+        <md-progress-bar mode="determinate" [value]="character.special_attribute_points / character.metatype_priority.getSpecialAttributePoints(character.metatype) * 100"></md-progress-bar>
+      </md-card-content>
+    </md-card>
 
-<metatype [character]="character"></metatype>
+    <attribute-group [attributes]="character.specialAttributes" title="Special Attributes"></attribute-group>
 
-<attribute-group [attributes]="character.specialAttributes" title="Special Attributes"></attribute-group>
+    <attribute-group [attributes]="character.physicalAttributes" title="Physical Attributes"></attribute-group>
 
-<attribute-group [attributes]="character.physicalAttributes" title="Physical Attributes"></attribute-group>
+    <attribute-group [attributes]="character.mentalAttributes" title="Mental Attributes"></attribute-group>
+  </md-tab>
+</md-tab-group>
 
-<attribute-group [attributes]="character.mentalAttributes" title="Mental Attributes"></attribute-group>

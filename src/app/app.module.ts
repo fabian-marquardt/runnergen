@@ -11,6 +11,7 @@ import { AttributeComponent } from './components/attribute.component';
 import { AttributeGroupComponent } from './components/attribute-group.component';
 import { MetatypeComponent } from './components/metatype.component';
 import { MagicAbilityComponent } from './components/magic-ability.component';
+import { PriorityComponent } from './components/priority.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MagicAbilityComponent } from './components/magic-ability.component';
     AttributeComponent,
     AttributeGroupComponent,
     MetatypeComponent,
-    MagicAbilityComponent
+    MagicAbilityComponent,
+    PriorityComponent
   ],
   imports: [
     BrowserModule,

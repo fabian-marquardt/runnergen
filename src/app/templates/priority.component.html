@@ -1,0 +1,13 @@
+<md-card>
+  <md-card-header>
+    <md-card-title>{{ priority.getTitle() }}</md-card-title>
+    <md-card-subtitle>{{ priority.getSubtitle() }}</md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <md-radio-group class="priority-radio-group" [(ngModel)]="priority.selected_option">
+        <md-radio-button class="priority-radio-button" *ngFor="let option of priority.getOptions(); let i = index" [value]="i">
+            {{option}}
+        </md-radio-button>
+    </md-radio-group>
+  </md-card-content>
+</md-card>

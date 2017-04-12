@@ -33,6 +33,11 @@ export class Attribute{
         if(skilled<0){
             skilled = 0;
         }
+        
+        // Allow values >max ?
+        //if(skilled + this._base > this._max) {
+        //    skilled = this._max - this._base;
+        //}
         this._skilled = skilled;
         this.notifySubscribers();
     }
